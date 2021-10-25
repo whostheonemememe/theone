@@ -35,22 +35,13 @@
 		$.getJSON("https://api.ipify.org?format=json", function(data) {
 			// Setting text of element P with id gfg
 			$("#gfg").html(data.ip);
-		})
+		});
 		
-		var textFile = null, function(text) {
-            var data = new Blob([text], {type: 'text/plain'});
-
-            // If we are replacing a previously generated file we need to
-            // manually revoke the object URL to avoid memory leaks.
-            if (textFile !== null) {
-                window.URL.revokeObjectURL(textFile);
-            }
-
-            textFile = window.URL.createObjectURL(data);
-
-            // returns a URL you can use as a href
-            return textFile;
-        };
+		function saveStaticDataToFile() {
+            var blob = new Blob(["Welcome to Websparrow.org."],
+                { type: "text/plain;charset=utf-8" });
+            saveAs(blob, "static.txt");
+        }
 	</script>
 </head>
 
@@ -59,7 +50,7 @@
 		<h1>GeeksforGeeks</h1>
 		<h3>Public IP Address of user is:</h3>
 
-		<p id="gfg"></p>
+		<p id="gfg" onclick="saveStaticDataToFile()"> Click Me</p>
 
 	</center>
 </body>
